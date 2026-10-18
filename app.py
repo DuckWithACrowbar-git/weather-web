@@ -21,7 +21,7 @@ instruction = " "
 NWSheadline = " "
 
 def get_data():
-    sleep(5)
+    # sleep(5)
     while True:
         response = requests.get(URL)
         data = response.json()
@@ -35,6 +35,9 @@ def get_data():
         description = (data["features"][0]["properties"]["description"])
         instruction = (data["features"][0]["properties"]["instruction"])
         NWSheadline = (data["features"][0]["properties"]["parameters"]["NWSheadline"][0])
+
+        description = str(description).replace("*", "\n").removeprefix("...").replace("...", " ").replace("  ", " ")
+        
         print("Pulled data at " + ctime())
         sleep(TIME_TO_WAIT)
 
